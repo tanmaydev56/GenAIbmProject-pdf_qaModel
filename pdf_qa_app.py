@@ -8,9 +8,11 @@ import os
 import hashlib
 import pickle
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
 
 # ---------------------- Configuration ----------------------
-API_KEY = "AIzaSyCfLXqdvUysY-V9sS38UtypW5DtCVQqS7U"
+API_KEY =os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=API_KEY)
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
