@@ -22,7 +22,7 @@ app.add_middleware(
 
 # Load model and setup once
 model = SentenceTransformer('all-MiniLM-L6-v2')
-genai.configure(api_key="AIzaSyCfLXqdvUysY-V9sS38UtypW5DtCVQqS7U")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def hash_pdf(file_bytes):
     return hashlib.md5(file_bytes).hexdigest()
 def save_index_and_chunks(pdf_hash, index, chunks):
