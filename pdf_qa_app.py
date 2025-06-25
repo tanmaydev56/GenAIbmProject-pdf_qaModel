@@ -3,14 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pypdf import PdfReader
 from sentence_transformers import SentenceTransformer
 import faiss
-import numpy as np
-import os
+
 import hashlib
 import pickle
 import google.generativeai as genai
-from dotenv import load_dotenv
+
 import os
-import uvicorn
+
 
 
 # ---------------------- Configuration ----------------------
@@ -109,6 +108,10 @@ async def ask_pdf(file: UploadFile = File(...), question: str = Form(...)):
 
 # ---------------------- CLI Mode (Optional) ----------------------
 if __name__ == "__main__":
+    import uvicorn
+
+    port = int(os.environ.get("PORT", 8000))  # Render sets PORT, fallback to 8000 for local dev
+    uvicorn.run("pdf_qa_app:app", host="0.0.0.0", port=port, reload=False)
     pdf_path = input("Enter path to PDF file: ").strip()
     question = input("Ask a question about the PDF: ").strip()
 
@@ -143,5 +146,3 @@ if __name__ == "__main__":
     print("\n🤖 Gemini's Answer:\n")
     print(answer)
 
-port = int(os.environ.get("PORT", 8000))  # fallback to 8000 for local
-uvicorn.run(app, host="0.0.0.0", port=port)
