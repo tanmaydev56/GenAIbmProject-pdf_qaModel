@@ -10,6 +10,7 @@ import pickle
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+import uvicorn
 
 
 # ---------------------- Configuration ----------------------
