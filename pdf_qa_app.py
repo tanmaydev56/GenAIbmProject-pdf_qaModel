@@ -11,6 +11,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
+
 # ---------------------- Configuration ----------------------
 API_KEY =os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=API_KEY)
@@ -140,3 +141,6 @@ if __name__ == "__main__":
     answer = query_gemini("\n\n".join(retrieved_chunks), question)
     print("\n🤖 Gemini's Answer:\n")
     print(answer)
+
+port = int(os.environ.get("PORT", 8000))  # fallback to 8000 for local
+uvicorn.run(app, host="0.0.0.0", port=port)
