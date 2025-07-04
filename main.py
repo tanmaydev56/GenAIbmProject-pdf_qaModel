@@ -259,7 +259,7 @@ async def ask_pdf(
         contents = await file.read()
         if len(contents) > Config.MAX_PDF_SIZE:
             raise HTTPException(status_code=413,
-                                detail=f"PDF file too large. Max size is {Config.MAX_PDF_SIZE // (1024 * 1024)}MB")
+                              detail=f"PDF file too large. Max size is {Config.MAX_PDF_SIZE // (1024 * 1024)}MB")
 
         pdf_hash = hash_pdf(contents)
 
@@ -335,7 +335,7 @@ async def ask_pdf(
         raise
     except Exception as e:
         logger.error(f"Unexpected error: {str(e)}", exc_info=True)
-        raise HTTPException(status_code=500, detail="An unexpected error occurred")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred while processing the request.")
 
 
 @app.get("/health")
